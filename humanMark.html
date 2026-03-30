@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap" rel="stylesheet">
+
+    <link href="styles.css" rel="stylesheet">
+
+    <style>
+        /* Pull quote */
+        .pull-quote {
+            max-width: 1400px;
+            margin: 0 auto 10px;
+            padding: 20px 40px 20px 50px;
+            border-left: 5px solid #000;
+            position: relative;
+        }
+        .pull-quote::before {
+            content: '\201C';
+            font-family: 'Fraunces', serif;
+            font-size: 6rem;
+            color: #000;
+            opacity: 0.08;
+            position: absolute;
+            top: -1rem;
+            left: 0.8rem;
+            line-height: 1;
+        }
+        .pull-quote p {
+            font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+            font-style: italic;
+            font-weight: 700;
+            line-height: 1.5;
+            margin: 0 0 6px 0;
+            text-align: left;
+        }
+        .pull-quote cite {
+            font-size: 13px;
+            color: #666;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-style: normal;
+            font-family: 'Fraunces', serif;
+        }
+
+        /* Pivot callout */
+        .pivot-callout {
+            background: #000;
+            color: #fff;
+            padding: 30px 40px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .pivot-callout::before {
+            content: 'PIVOT';
+            font-family: 'Anton', sans-serif;
+            font-size: 5rem;
+            color: #fff;
+            opacity: 0.06;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            letter-spacing: -0.02em;
+            line-height: 1;
+            pointer-events: none;
+        }
+        .pivot-callout h3 {
+            color: #fff;
+            border-bottom: 1px solid #444;
+            margin-top: 0px;
+        }
+        .pivot-callout p {
+            color: #ccc;
+            margin: 0;
+        }
+
+        /* Three-pillar topic cards */
+        .topics-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        @media (min-width: 700px) {
+            .topics-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        .topic-card {
+            border: 2px solid #000;
+            padding: 20px;
+            background: #fff;
+            position: relative;
+        }
+        .topic-number {
+            font-family: 'Anton', sans-serif;
+            font-size: 3rem;
+            color: #000;
+            opacity: 0.07;
+            position: absolute;
+            top: 6px;
+            right: 12px;
+            line-height: 1;
+        }
+        .topic-card h3 {
+            margin-top: 0;
+            font-size: 18px;
+        }
+        .topic-card p {
+            font-size: 15px;
+            margin: 0;
+        }
+
+        /* Project link image banner */
+        .project-link-wrapper {
+            display: block;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid #000;
+            box-shadow: 8px 8px 0 #000;
+            text-decoration: none;
+            color: inherit;
+            margin-top: 20px;
+            transition: transform 0.2s;
+        }
+        .project-link-wrapper:hover {
+            transform: scale(1.01);
+        }
+        .project-link-wrapper img {
+            width: 100%;
+            display: block;
+            aspect-ratio: 16 / 6;
+            object-fit: cover;
+            transition: transform 0.5s ease, filter 0.5s ease;
+            filter: grayscale(20%);
+            margin: 0;
+        }
+        .project-link-wrapper:hover img {
+            transform: scale(1.04);
+            filter: grayscale(0%);
+        }
+        .project-link-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.1) 55%, transparent 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 24px 32px;
+            transition: background 0.4s ease;
+        }
+        .project-link-wrapper:hover .project-link-overlay {
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.25) 60%, transparent 100%);
+        }
+        .project-link-label {
+            font-family: 'Fraunces', serif;
+            font-style: italic;
+            font-size: 13px;
+            color: #aaa;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        .project-link-title {
+            font-family: 'Anton', sans-serif;
+            font-size: clamp(1.6rem, 4vw, 3rem);
+            color: #fff;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+        .project-link-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Fraunces', serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+            opacity: 0.65;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: opacity 0.3s, gap 0.3s;
+        }
+        .project-link-wrapper:hover .project-link-cta {
+            opacity: 1;
+            gap: 14px;
+        }
+        .project-link-cta::after {
+            content: '→';
+            font-size: 1.1rem;
+            transition: transform 0.3s;
+        }
+        .project-link-wrapper:hover .project-link-cta::after {
+            transform: translateX(4px);
+        }
+    </style>
+
+<title>The Human Mark</title>
+</head>
+<body>
+
+<header>
+    <img src="images/portfoliosketch.svg" alt="portfolio logo">
+    <h2>Hunter Boyenga</h2>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<h1>The Human Mark</h1>
+<div class="subheader">
+    <h3>Est. 2025</h3>
+    <h3>Davis / Atwater, CA</h3>
+    <h3>Interactive Narrative</h3>
+</div>
+
+
+<main>
+    <!-- PROJECT LINK -->
+    <section>
+            <h2>Experience the Project</h2>
+            <p>See the interactive narrative in action — historical aerial photographs fading across time, from glaciers to cities, from then to now.</p>
+            <a href="https://hjboyenga.github.io/des157a-winter2026/everypicture/v2-final-version/index.html" class="project-link-wrapper" target="_blank" rel="noopener noreferrer">
+                <img src="images/theHumanMark.png" alt="The Human Mark — interactive narrative preview">
+                <div class="project-link-overlay">
+                    <div class="project-link-label">Interactive Narrative</div>
+                    <div class="project-link-title">The Human Mark</div>
+                    <span class="project-link-cta">View the project</span>
+                </div>
+            </a>
+        </section>
+    <!-- CONCEPT -->
+    <section>
+        <h2>Concept</h2>
+        <p>This project uses historical and modern photography to explore a simple but profound idea: the patterns of human experience never truly disappear — they just take on new shapes. Empires rise and fall. Relationships bloom and collapse. And all the while, the land beneath us quietly keeps score.</p>
+        <p>By layering photographs across time — from sweeping aerial views of glaciers retreating to cities sprawling outward — the project invites viewers to feel the weight of change without being told what to think. The images are chosen because they are universal: we have all felt the ache of something ending, or the uncanny sense that we have been here before.</p>
+    </section>
+
+    <!-- TOPICS -->
+    <section>
+        <h2>Three Starting Ideas</h2>
+        <p>The project is organized around three interlocking themes, each explored through a different photographic lens.</p>
+        <div class="topics-grid">
+            <div class="topic-card">
+                <div class="topic-number">01</div>
+                <h3>The Rhyme</h3>
+                <p>Drawing on historical subway photography and progressively moving toward modern images, this thread traces how the patterns of rise, decay, and renewal echo across generations — in our cities and in our personal lives.</p>
+            </div>
+            <div class="topic-card">
+                <div class="topic-number">02</div>
+                <h3>From Above</h3>
+                <p>Aerial photography reveals connections invisible at street level. Glaciers retreating. Cities sprawling. The same geometry appears in a 1940s suburb and a modern solar farm. Past, Present, and Future converge into one continuous shape.</p>
+            </div>
+            <div class="topic-card">
+                <div class="topic-number">03</div>
+                <h3>Flip Your Perspective</h3>
+                <p>Sometimes the only way to find the positive is to literally invert your view. This section encourages the audience to reframe what they see — in the photographs, and in their own experiences.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- THE PIVOT -->
+    <section>
+        <h2>The Project Pivot</h2>
+        <p>Honest process is part of good design. Halfway through developing this project, the subject matter changed — and that shift is worth naming directly.</p>
+        <div class="pivot-callout">
+            <h3>Why I Changed Direction</h3>
+            <p>The subway imagery was visually compelling, but ultimately too interior — too confined to capture the scale of what I wanted to say. After discovering a set of high-quality aerial photographs documenting a retreating glacier and the explosive growth of Las Vegas, it became clear: <em>these</em> images carry the weight the concept demands. The impact humanity has had on this Earth is visible from the sky in a way it simply isn't underground. Switching mid-project was the right call.</p>
+        </div>
+        <p>The core thesis — that history rhymes, that our personal experiences mirror planetary ones — actually became <em>stronger</em> after the pivot. A melting glacier and a spreading city say something about time and consequence that no subway platform ever could.</p>
+    </section>
+
+    <!-- INTERACTIVE ELEMENTS -->
+    <section>
+        <h2>Interactive Design</h2>
+        <p>The interactive layer is where the concept comes alive. Several elements are planned or in progress:</p>
+        <ul>
+            <li><strong>Crossfade transitions</strong> between historical and modern photographs, so that images literally bleed into one another — visualizing the "rhyme" rather than just describing it.</li>
+            <li><strong>Chronological timeline</strong> running along the edge of the page, giving viewers a clear sense of temporal direction as images age progressively from present to past.</li>
+            <li><strong>Image citations</strong> presented creatively at the close of the experience — integrated into the design rather than relegated to a footnote.</li>
+            <li><strong>Word timing refinement</strong> — based on roommate feedback, text overlays will be re-synced so that key words appear at the exact moment they land emotionally with the image.</li>
+        </ul>
+    </section>
+
+    <!-- PEER FEEDBACK -->
+    <section>
+        <h2>Peer Feedback</h2>
+        <p>After sharing an early prototype with roommates, three pieces of concrete feedback shaped the next iteration:</p>
+        <ul>
+            <li>The image crossfade effect resonated immediately — the sense of one era dissolving into another felt right and emotionally legible.</li>
+            <li>One text element was appearing out of sync with its corresponding image. Timing needs to be recalibrated so the word lands at the right moment.</li>
+            <li>A timeline along the edge of the scroll would help orient viewers, making it explicit that images grow older as you move through the experience.</li>
+        </ul>
+    </section>
+
+    <!-- WHAT'S NEXT -->
+    <section>
+        <h2>What's Next</h2>
+        <p>The project is actively in development. Immediate next steps include sourcing and clearing rights for the aerial glacier and Las Vegas photography, refining the crossfade timing, implementing the edge timeline feature, and designing the citation display at the project's close.</p>
+        <p>The larger goal — making viewers feel that their most private, lonely experiences are actually profoundly shared — remains the emotional north star of everything that comes next.</p>
+    </section>    
+
+</main>
+
+<footer id="contact">
+    <p>Designed by Hunter Boyenga</p>
+    <address>
+        Contact: <a href="mailto:&#104;&#106;&#098;&#111;&#121;&#101;&#110;&#103;&#097;&#064;&#117;&#099;&#100;&#097;&#118;&#105;&#115;&#046;&#101;&#100;&#117;">&#104;&#106;&#098;&#111;&#121;&#101;&#110;&#103;&#097;&#064;&#117;&#099;&#100;&#097;&#118;&#105;&#115;&#046;&#101;&#100;&#117;</a>
+    </address>
+</footer>
+
+</body>
+</html>

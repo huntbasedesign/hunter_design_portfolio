@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap" rel="stylesheet">
+    
+    <link href="styles.css" rel="stylesheet">
+    <title>Hunter's Interactive Narrative</title>
+</head>
+<body>
+<header>
+    <img src="images/portfoliosketch.svg" alt="portfolio logo">
+    <h2>Hunter Boyenga</h2>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+<h1>Bridge</h1>
+    <div class="subheader">
+        <h3>DES 115 — Project 3</h3>
+        <h3>Davis, CA</h3>
+        <h3>November 2025</h3>
+    </div>
+<main>
+    <div class="slideshow" id="slideshow-drafts">
+        <div class="slideshow-track">
+            <div class="slide active">
+                <div class="slide-frame"><img src="images/bridgeFinal.jpg" alt="Bridge Cover"></div>
+                <p class="slide-caption">Final Cover</p>
+            </div>
+            <div class="slide">
+                <div class="slide-frame"><img src="images/bridgeMindMap.jpg" alt="Bridge Mind Map"></div>
+                <p class="slide-caption">Mind Map</p>
+            </div>
+            <div class="slide">
+                <div class="slide-frame"><img src="images/draftBridge1.jpg" alt="Bridge Draft Cover"></div>
+                <p class="slide-caption">Draft — Cover</p>
+            </div>
+            <div class="slide">
+                <div class="slide-frame"><img src="images/draftBridge2.jpg" alt="Bridge Draft Page 2"></div>
+                <p class="slide-caption">Draft — Page 2</p>
+            </div>
+            <div class="slide">
+                <div class="slide-frame"><img src="images/draftBridge3.jpg" alt="Bridge Draft Page 3"></div>
+                <p class="slide-caption">Draft — Page 3</p>
+            </div>
+        </div>
+        <button class="slide-btn prev" aria-label="Previous slide">&#8592;</button>
+        <button class="slide-btn next" aria-label="Next slide">&#8594;</button>
+        <div class="slide-dots">
+            <span class="dot active" data-index="0"></span>
+            <span class="dot" data-index="1"></span>
+            <span class="dot" data-index="2"></span>
+            <span class="dot" data-index="3"></span>
+            <span class="dot" data-index="4"></span>
+        </div>
+    </div>
+ 
+    <script>
+        (function() {
+            const el     = document.getElementById('slideshow-drafts');
+            const slides = el.querySelectorAll('.slide');
+            const dots   = el.querySelectorAll('.dot');
+            let current  = 0;
+ 
+            function goTo(n) {
+                slides[current].classList.remove('active');
+                dots[current].classList.remove('active');
+                current = (n + slides.length) % slides.length;
+                slides[current].classList.add('active');
+                dots[current].classList.add('active');
+            }
+ 
+            el.querySelector('.prev').addEventListener('click', () => goTo(current - 1));
+            el.querySelector('.next').addEventListener('click', () => goTo(current + 1));
+            dots.forEach(dot => dot.addEventListener('click', () => goTo(+dot.dataset.index)));
+        })();
+    </script>
+    
+    <h2>Design Brief</h2>
+ 
+    <h3>Project Overview</h3>
+        <p>BRIDGE is an interactive editorial book project created for DES 115, exploring the word "bridge" in its many dimensions — literal, metaphorical, historical, musical, and engineering. The project began with a mind map unpacking the full range of meanings the word carries: from structural definitions and architectural typologies, to its role as a musical term, a dental prosthetic, a card game, and a poetic symbol of human connection and transition.</p>
+        <p>The design challenge was to create a cohesive publication that could hold all of these ideas together — presenting them not as a dictionary entry, but as a layered editorial experience. The result is a ten-page book that moves through definition, architecture, history, iconic landmarks, engineering, and the future of bridges, unified by a bold red, black, and white visual identity and large-scale typographic gestures that bleed across spreads.</p>
+ 
+    <h3>Concept &amp; Mind Map</h3>
+        <p>The mind map that drove this project branched outward from a single word into four primary territories. The first was the literal bridge — its structural definitions, types (beam, truss, arch, suspension, cable-stayed, cantilever), and materials. The second branch explored bridges in music: songs like "Bridge Over Troubled Water" by Simon &amp; Garfunkel, which use the bridge metaphorically as comfort and support, and "Under the Bridge" by Red Hot Chili Peppers, which ties the word to a specific Los Angeles landmark and a moment of personal crisis. The third branch examined the word's other noun meanings — the bridge of a nose, a dental bridge, a musical instrument's bridge, and the card game. The fourth and most visually rich branch traced the cultural and historical weight of specific bridges: the Golden Gate, Tower Bridge, the Brooklyn Bridge.</p>
+        <p>This mind map became the editorial spine of the book, ensuring that each spread had a clear conceptual focus while still contributing to the larger thesis — that the word "bridge" is fundamentally about connection, whether between two banks of a river or two people.</p>
+ 
+    <h3>Visual Identity &amp; Typography</h3>
+        <p>The book's aesthetic is rooted in historical newspaper design and archival print culture. The primary typeface palette draws from serif and blackletter traditions, evoking the front pages of the 1937 San Francisco Chronicle that announced the Golden Gate Bridge's opening day. The dominant color is a bold crimson red used both as a background field and as a typographic highlight, contrasted against black-and-white archival photography throughout. Large italic display type — often cropped or bleeding off the page edge — functions as both visual texture and navigational landmark, naming each chapter with words like ARCHITECTURE, HISTORY, ICONIC, and FUTURE.</p>
+        <p>This typographic treatment was intentional: bridges are large structures that extend beyond any single frame of view. The bleed type mimics that quality, giving the reader the sensation of standing underneath something that stretches beyond what they can see.</p>
+ 
+    <h3>Content Structure</h3>
+        <p>The book opens with a cover featuring a vintage black-and-white photograph of the Golden Gate Bridge overlaid with the title in large red display type — immediately establishing both the subject and the visual register. Page 1 introduces the noun definition of "bridge" in all its forms, from Merriam-Webster, presented as a cascading indented list against a dramatic arch bridge photograph. Page 2 covers architecture, detailing bridge typologies from beam to cantilever with a full-bleed ARCHITECTURE wordmark. Pages 3 and 4 move through history — Mesopotamia, Rome, and the Brooklyn Bridge — paired with archival imagery. Pages 5 and 6 feature iconic bridges: the Golden Gate, Tower Bridge, and the Millau Viaduct, with the ICONIC spread rendered in all red. Pages 7 and 8 address engineering, ending with the typographic pull quote "Strength is not about complexity but about resting on a Solid Foundation." Pages 9 and 10 close the book with a forward-looking essay on the future of bridge design, alongside engineering blueprints of the Golden Gate's main span and a full-bleed construction photograph of workers on the cables.</p>
+ 
+    <h3>Music &amp; Metaphor</h3>
+        <p>One of the most distinctive sections of the mind map — and the book — is the treatment of bridges in music and metaphor. In songwriting, the "bridge" is the structural section that breaks the verse-chorus pattern, introducing contrast and emotional resolution before returning to the chorus. This musical definition mirrors the architectural one exactly: a bridge is something that gets you from one place to another by offering an alternative path. Songs like "Burning Bridges" speak to severing connection, while "Build a Bridge" speaks to repair. The Dolly Parton poem included in the research materials treats the bridge as a site of beginning and ending — the place where a relationship starts and, eventually, where the narrator returns alone. These musical and poetic readings were woven into the book's design logic, reinforcing that BRIDGE as a subject is never just about steel and concrete.</p>
+ 
+    <h3>Research &amp; Sources</h3>
+        <ul>
+            <li>Cambridge Dictionary definitions of "bridge" and "bridge a gap"</li>
+            <li>Merriam-Webster noun definitions (structural, dental, musical, card game)</li>
+            <li>San Francisco Chronicle front page, May 28, 1937 — Golden Gate Bridge opening</li>
+            <li>Archival engineering blueprints: Golden Gate Bridge Main Bridge Plan and Elevation</li>
+            <li>Historical and contemporary photography from the Smithsonian Institution and Pexels</li>
+            <li>Musical references: Simon &amp; Garfunkel, Red Hot Chili Peppers, Fergie, Dolly Parton, Bonnie Tyler, Pink Floyd</li>
+        </ul>
+ 
+    <h2>Book Spreads</h2>
+ 
+    <div class="slideshow" id="slideshow-book">
+        <div class="slideshow-track">
+ 
+            <!-- Slide 1: Pages 4–5 -->
+            <div class="slide active spread-full">
+                <div class="slide-frame">
+                    <img src="images/bridgeImages/DES 115 Project 3 Final3.jpg" alt="Pages 4–5">
+                </div>
+                <p class="slide-caption">Pages 4 – 5</p>
+            </div>
+ 
+            <!-- Slide 2: Pages 6–7 -->
+            <div class="slide spread-full">
+                <div class="slide-frame">
+                    <img src="images/bridgeImages/DES 115 Project 3 Final4.jpg" alt="Pages 6–7">
+                </div>
+                <p class="slide-caption">Pages 6 – 7</p>
+            </div>
+ 
+            <!-- Slide 3: Pages 8–9 -->
+            <div class="slide spread-full">
+                <div class="slide-frame">
+                    <img src="images/bridgeImages/DES 115 Project 3 Final5.jpg" alt="Pages 8–9">
+                </div>
+                <p class="slide-caption">Pages 8 – 9</p>
+            </div>
+ 
+            <!-- Slide 4: Pages 10–11 -->
+            <div class="slide spread-full">
+                <div class="slide-frame">
+                    <img src="images/bridgeImages/DES 115 Project 3 Final6.jpg" alt="Pages 10–11">
+                </div>
+                <p class="slide-caption">Pages 10 – 11</p>
+            </div>
+ 
+            <!-- Slide 5: Pages 12–13 -->
+            <div class="slide spread-full">
+                <div class="slide-frame">
+                    <img src="images/bridgeImages/DES 115 Project 3 Final7.jpg" alt="Pages 12–13">
+                </div>
+                <p class="slide-caption">Pages 12 – 13</p>
+            </div>
+ 
+            <!-- Slide 6: Pages 14–15 -->
+            <div class="slide spread-full">
+                <div class="slide-frame">
+                    <img src="images/bridgeImages/DES 115 Project 3 Final8.jpg" alt="Pages 14–15">
+                </div>
+                <p class="slide-caption">Pages 14 – 15</p>
+            </div>
+ 
+            <!-- Slide 7: Back Cover -->
+            <div class="slide single">
+                <div class="slide-frame">
+                    <img src="images/bridgeImages/DES 115 Project 3 Final9.jpg" alt="Back Cover">
+                </div>
+                <p class="slide-caption">Back Cover</p>
+            </div>
+ 
+        </div>
+ 
+        <button class="slide-btn prev" aria-label="Previous slide">&#8592;</button>
+        <button class="slide-btn next" aria-label="Next slide">&#8594;</button>
+ 
+        <div class="slide-dots">
+            <span class="dot active" data-index="0"></span>
+            <span class="dot" data-index="1"></span>
+            <span class="dot" data-index="2"></span>
+            <span class="dot" data-index="3"></span>
+            <span class="dot" data-index="4"></span>
+            <span class="dot" data-index="5"></span>
+            <span class="dot" data-index="6"></span>
+        </div>
+    </div>
+ 
+    <script>
+        (function() {
+            const el     = document.getElementById('slideshow-book');
+            const slides = el.querySelectorAll('.slide');
+            const dots   = el.querySelectorAll('.dot');
+            let current  = 0;
+ 
+            function goTo(n) {
+                slides[current].classList.remove('active');
+                dots[current].classList.remove('active');
+                current = (n + slides.length) % slides.length;
+                slides[current].classList.add('active');
+                dots[current].classList.add('active');
+            }
+ 
+            el.querySelector('.prev').addEventListener('click', () => goTo(current - 1));
+            el.querySelector('.next').addEventListener('click', () => goTo(current + 1));
+            dots.forEach(dot => dot.addEventListener('click', () => goTo(+dot.dataset.index)));
+        })();
+    </script>
+ 
+</main>
+<footer id="contact">
+<p>Designed by Hunter Boyenga</p>
+<address>
+            Contact: <a href="mailto:&#104;&#106;&#098;&#111;&#121;&#101;&#110;&#103;&#097;&#064;&#117;&#099;&#100;&#097;&#118;&#105;&#115;&#046;&#101;&#100;&#117;">&#104;&#106;&#098;&#111;&#121;&#101;&#110;&#103;&#097;&#064;&#117;&#099;&#100;&#097;&#118;&#105;&#115;&#046;&#101;&#100;&#117;</a>
+        </address>
+</footer>
+</body>
+</html>
