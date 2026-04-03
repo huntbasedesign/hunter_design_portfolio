@@ -4,19 +4,189 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap" rel="stylesheet">
-    
     <link href="styles.css" rel="stylesheet">
 
-    <title>Hunter's Interactive Narrative</title>
+    <style>
+        .dark-callout {
+            background: #000;
+            color: #fff;
+            padding: 30px 40px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .dark-callout::before {
+            content: attr(data-label);
+            font-family: 'Anton', sans-serif;
+            font-size: 5rem;
+            color: #fff;
+            opacity: 0.06;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            letter-spacing: -0.02em;
+            line-height: 1;
+            pointer-events: none;
+        }
+        .dark-callout h3 {
+            color: #fff;
+            border-bottom: 1px solid #444;
+            margin-top: 0;
+        }
+        .dark-callout p {
+            color: #ccc;
+            margin: 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        @media (min-width: 700px) {
+            .features-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        .feature-card {
+            border: 2px solid #000;
+            padding: 20px;
+            background: #fff;
+            position: relative;
+        }
+        .feature-number {
+            font-family: 'Anton', sans-serif;
+            font-size: 3rem;
+            color: #000;
+            opacity: 0.07;
+            position: absolute;
+            top: 6px;
+            right: 12px;
+            line-height: 1;
+        }
+        .feature-card h3 {
+            margin-top: 0;
+            font-size: 18px;
+            border-bottom: none;
+        }
+        .feature-card p {
+            font-size: 15px;
+            margin: 0;
+        }
+
+        .color-swatches {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 16px 0;
+        }
+        .swatch {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+        .swatch-block {
+            width: 60px;
+            height: 60px;
+            border: 2px solid #000;
+        }
+        .swatch span {
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            color: #333;
+        }
+
+        .project-link-wrapper {
+            display: block;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid #000;
+            box-shadow: 8px 8px 0 #000;
+            text-decoration: none;
+            color: inherit;
+            margin-top: 20px;
+            transition: transform 0.2s;
+        }
+        .project-link-wrapper:hover { transform: scale(1.01); }
+        .project-link-wrapper img {
+            width: 100%;
+            display: block;
+            aspect-ratio: 16 / 6;
+            object-fit: cover;
+            transition: transform 0.5s ease, filter 0.5s ease;
+            filter: grayscale(20%);
+            margin: 0;
+        }
+        .project-link-wrapper:hover img {
+            transform: scale(1.04);
+            filter: grayscale(0%);
+        }
+        .project-link-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.1) 55%, transparent 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 24px 32px;
+            transition: background 0.4s ease;
+        }
+        .project-link-wrapper:hover .project-link-overlay {
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.25) 60%, transparent 100%);
+        }
+        .project-link-label {
+            font-family: 'Fraunces', serif;
+            font-style: italic;
+            font-size: 13px;
+            color: #aaa;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        .project-link-title {
+            font-family: 'Anton', sans-serif;
+            font-size: clamp(1.6rem, 4vw, 3rem);
+            color: #fff;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+        .project-link-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Fraunces', serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+            opacity: 0.65;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: opacity 0.3s, gap 0.3s;
+        }
+        .project-link-wrapper:hover .project-link-cta { opacity: 1; gap: 14px; }
+        .project-link-cta::after {
+            content: '→';
+            font-size: 1.1rem;
+            transition: transform 0.3s;
+        }
+        .project-link-wrapper:hover .project-link-cta::after { transform: translateX(4px); }
+    </style>
+
+    <title>Americans for the Arts</title>
 </head>
+<body>
+
 <header>
-    <img src="images/portfoliosketch.svg" alt="portfolio logo">
-    <h2>Hunter
-        Boyenga</h2>
+    <div style="display: flex; align-items: center; gap: 12px;">
+        <img src="images/portfoliosketch.svg" alt="portfolio logo">
+        <h2 style="font-family: 'Anton', sans-serif; font-size: 2.2rem; line-height: 1; letter-spacing: 2px; margin: 0;">HUNTER<br>BOYENGA</h2>
+    </div>
     <nav>
         <ul>
             <li><a href="index.html">Home</a></li>
@@ -25,97 +195,197 @@
         </ul>
     </nav>
 </header>
+
 <h1>Americans for the Arts</h1>
-    <div class="subheader">
-        <h3>Est. 2025</h3>
-        <h3>Davis / Atwater, CA</h3>
-        <h3>November, 11th 2025</h3>
-    </div>
+<div class="subheader">
+    <h3>Est. 2025</h3>
+    <h3>Davis / Atwater, CA</h3>
+    <h3>DES 112 - UX/UI Design</h3>
+</div>
+
 <main>
-    <img src="images/americansforthearts.jpg" alt="Americans for Arts Home Page">
-<h2>Design Brief</h2>
 
+    <!-- PROJECT LINK BANNER -->
+    <!-- PROJECT LINKS -->
 <section>
-  <h3>Overview</h3>
-  <p>Americans for the Arts is a nonprofit that supports art education for students across the United States. This redesign modernizes the site, improves usability, and provides clearer access to resources, funding, and community programs for educators.</p>
+    <h2>View the Redesign</h2>
+    <p>A UX-focused redesign of Americans for the Arts — simplifying navigation, elevating student artwork, and connecting teachers to the grants and resources they need.</p>
+    <a href="https://www.figma.com/proto/1LPSdQsi7Sb9gLANWzhygn/DES-112--Project-1-Draft-1-Website?node-id=1-3&page-id=0%3A1&starting-point-node-id=1%3A3&t=LYyNABhjUDKGz9OR-1" class="project-link-wrapper" target="_blank" rel="noopener noreferrer" style="margin-top: 24px;">
+            <img src="images/americansforthearts.jpg" alt="Americans for the Arts web redesign preview">
+            <div class="project-link-overlay">
+                <div class="project-link-label">Web Version</div>
+                <div class="project-link-title">Web Redesign</div>
+                <span class="project-link-cta">View web</span>
+            </div>
+        </a>
+    <a href="https://www.figma.com/proto/QkPFevzEybQ5NmbqBDD54d/DES-112--Project-1-Draft-1-Moblie?node-id=1-2&page-id=0%3A1&starting-point-node-id=1%3A2&t=rgcXRAPtyp4ENYJm-1" class="project-link-wrapper" target="_blank" rel="noopener noreferrer">
+        <img src="images/mobileAmerforArt.png" alt="Americans for the Arts mobile redesign preview">
+        <div class="project-link-overlay">
+            <div class="project-link-label">Mobile Version</div>
+            <div class="project-link-title">Mobile Redesign</div>
+            <span class="project-link-cta">View mobile</span>
+        </div>
+    </a>
+
+    
 </section>
 
-<section>
-  <h3>Persona</h3>
-  <h4>Laura Eckman — High School Art Teacher</h4>
-  <p>Mrs. Eckman teaches over 200 students daily and volunteers in local arts organizations. She seeks grants, classroom materials, and ways to support student creativity.</p>
-</section>
+    <!-- OVERVIEW -->
+    <section>
+        <h2>Design Brief</h2>
 
-<section>
-  <h3>Target Audience</h3>
-  <p>Middle-aged women with a passion for the arts—especially art teachers—represent the core audience. They frequently search for funding and educational support resources.</p>
-</section>
+        <div class="dark-callout" data-label="MISSION">
+            <h3>Overview</h3>
+            <p>Americans for the Arts is a nonprofit that supports art education for students across the United States. This redesign modernizes the site, improves usability, and provides clearer access to resources, funding, and community programs for educators.</p>
+        </div>
+    </section>
 
-<section>
-  <h3>Problem</h3>
-  <p>The original website was visually cluttered, with overwhelming navigation and poor hierarchy. Teachers struggled to find grants and resources efficiently, and donation opportunities lacked visibility.</p>
+    <!-- PERSONA -->
+    <section>
+        <h2>Persona</h2>
+        <h4>Laura Eckman — High School Art Teacher</h4>
+        <p>Mrs. Eckman teaches over 200 students daily and volunteers in local arts organizations. She seeks grants, classroom materials, and ways to support student creativity.</p>
 
-  <h3>Project Goals</h3>
-  <ul>
-    <li>Simplify navigation and improve user flow</li>
-    <li>Highlight student artwork and impact stories</li>
-    <li>Modernize branding for a strong national identity</li>
-    <li>Increase clarity around donations and membership</li>
-  </ul>
-</section>
+        <div class="dark-callout" data-label="AUDIENCE">
+            <h3>Target Audience</h3>
+            <p>Middle-aged women with a passion for the arts — especially art teachers — represent the core audience. They frequently search for funding and educational support resources.</p>
+        </div>
+    </section>
 
-<section>
-  <h3>Research Insights</h3>
-  <p>Competitor analysis revealed extremes in design styles—either overly minimalist or overwhelmingly maximalist. Americans for the Arts had a maximalist, cluttered layout. Reducing menu items and simplifying the structure became a key focus.</p>
-</section>
+    <!-- PROBLEM + GOALS -->
+    <section>
+        <h2>Problem &amp; Goals</h2>
+        <p>The original website was visually cluttered, with overwhelming navigation and poor hierarchy. Teachers struggled to find grants and resources efficiently, and donation opportunities lacked visibility.</p>
 
-<section>
-  <h3>Branding System</h3>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-number">01</div>
+                <h3>Simplify Navigation</h3>
+                <p>Reduce menu items and streamline user flow so teachers reach grants and resources in fewer clicks.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-number">02</div>
+                <h3>Highlight Impact</h3>
+                <p>Elevate student artwork and community stories to reinforce the organization's mission on every page.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-number">03</div>
+                <h3>Modernize Branding</h3>
+                <p>Build a strong national identity with Americana-inspired visuals and increased visibility around donations and membership.</p>
+            </div>
+        </div>
+    </section>
 
-  <h4>Old Branding</h4>
-  <p>The old identity did not match the organization's modern American theme or align with their current color scheme.</p>
+    <!-- RESEARCH -->
+    <section>
+        <h2>Research Insights</h2>
+        <p>Competitor analysis revealed extremes in design styles — either overly minimalist or overwhelmingly maximalist. Americans for the Arts sat firmly in the maximalist camp, with a cluttered layout that buried key content. Reducing menu items and simplifying the structure became a primary focus.</p>
+    </section>
 
-  <h4>New Branding</h4>
-  <p>The redesigned branding uses an Americana-inspired palette and school-based typography like Crimson. The updated logo removes unnecessary elements for a cleaner digital presence.</p>
+    <!-- BRANDING -->
+    <section>
+        <h2>Branding System</h2>
+        <p>The old identity didn't match the organization's modern American theme or align with their current color scheme. The redesigned branding uses an Americana-inspired palette and school-based typography like Crimson. The updated logo removes unnecessary elements for a cleaner digital presence.</p>
 
-  <h4>Color Palette</h4>
-  <p>#EBE0CD &nbsp; #72250F &nbsp; #B32E2B &nbsp; #476388 &nbsp; #191C2F</p>
-</section>
+        <div class="dark-callout" data-label="COLOR">
+            <h3>Color Palette</h3>
+            <p>An Americana-inspired system — warm parchment, deep reds, and patriotic navy — grounded in approachability and institutional trust.</p>
+        </div>
 
-<section>
-  <h3>Homepage Redesign</h3>
-  <p>A large hero image featuring student artwork creates a strong visual focal point. The donation button is now prominently placed, while card-based sections organize key resources in a simple, minimalistic layout.</p>
+        <div class="color-swatches">
+            <div class="swatch">
+                <div class="swatch-block" style="background:#EBE0CD;"></div>
+                <span>#EBE0CD</span>
+            </div>
+            <div class="swatch">
+                <div class="swatch-block" style="background:#72250F;"></div>
+                <span>#72250F</span>
+            </div>
+            <div class="swatch">
+                <div class="swatch-block" style="background:#B32E2B;"></div>
+                <span>#B32E2B</span>
+            </div>
+            <div class="swatch">
+                <div class="swatch-block" style="background:#476388;"></div>
+                <span>#476388</span>
+            </div>
+            <div class="swatch">
+                <div class="swatch-block" style="background:#191C2F;"></div>
+                <span>#191C2F</span>
+            </div>
+        </div>
+    </section>
 
-  <h4>Key Features</h4>
-  <ul>
-    <li>Hero area showcasing student creativity</li>
-    <li>Streamlined card sections for grants and programs</li>
-    <li>Improved hierarchy and readability</li>
-  </ul>
-</section>
+    <!-- HOMEPAGE REDESIGN -->
+    <section>
+        <h2>Homepage Redesign</h2>
+        <p>A large hero image featuring student artwork creates a strong visual focal point. The donation button is now prominently placed, while card-based sections organize key resources in a simple, minimalistic layout.</p>
 
-<section>
-  <h3>Mobile-First Approach</h3>
-  <p>Designing mobile-first ensured clarity and accessibility. A sliding hamburger menu keeps the homepage clean while maintaining full navigation options.</p>
-</section>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-number">01</div>
+                <h3>Hero Area</h3>
+                <p>Showcases student creativity front and center, making the human impact of the organization immediately visible.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-number">02</div>
+                <h3>Card Sections</h3>
+                <p>Streamlined card layout organizes grants and programs for fast scanning — no digging required.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-number">03</div>
+                <h3>Clear Hierarchy</h3>
+                <p>Improved typographic scale and spacing make the page readable at a glance across all screen sizes.</p>
+            </div>
+        </div>
+    </section>
 
-<section>
-  <h3>Reflection</h3>
+    <!-- MOBILE -->
+    <section>
+        <h2>Mobile-First Approach</h2>
 
-  <h4>Learning Moment</h4>
-  <p>This project deepened my understanding of UX research, wireframing, and content structure. Early planning proved essential for a more intentional design.</p>
+        <div class="dark-callout" data-label="MOBILE">
+            <h3>Designing for Small Screens First</h3>
+            <p>Designing mobile-first ensured clarity and accessibility. A sliding hamburger menu keeps the homepage clean while maintaining full navigation options — then expanding into a richer layout on larger screens.</p>
+        </div>
+    </section>
 
-  <h4>Impact</h4>
-  <p>The redesign makes resources easier for teachers to access and strengthens community engagement, ultimately supporting arts education nationwide.</p>
+    <!-- REFLECTION -->
+    <section>
+        <h2>Reflection</h2>
+        <p>This project deepened my understanding of UX research, wireframing, and content structure. Early planning proved essential for a more intentional design process — understanding who Laura is before picking a single color made every subsequent decision easier to justify.</p>
 
-  <h4>Future Improvements</h4>
-  <p>Possible enhancements include state hover effects for the interactive map, stronger visual feedback, and a global search feature for quick navigation.</p>
-</section>
+        <div class="dark-callout" data-label="IMPACT">
+            <h3>Impact</h3>
+            <p>The redesign makes resources easier for teachers to access and strengthens community engagement, ultimately supporting arts education nationwide.</p>
+        </div>
+
+        <p>Possible future enhancements include state hover effects for the interactive map, stronger visual feedback throughout, and a global search feature for quick navigation.</p>
+    </section>
+
 </main>
+
 <footer id="contact">
-<p>Designed by Hunter Boyenga</p>
-<address>
-            Contact: <a href="mailto:&#104;&#106;&#098;&#111;&#121;&#101;&#110;&#103;&#097;&#064;&#117;&#099;&#100;&#097;&#118;&#105;&#115;&#046;&#101;&#100;&#117;">&#104;&#106;&#098;&#111;&#121;&#101;&#110;&#103;&#097;&#064;&#117;&#099;&#100;&#097;&#118;&#105;&#115;&#046;&#101;&#100;&#117;</a>
-        </address>
+    <p>Designed by Hunter Boyenga</p>
+    <address>
+        Contact: <a href="mailto:&#104;&#106;&#098;&#111;&#121;&#101;&#110;&#103;&#097;&#064;&#117;&#099;&#100;&#097;&#118;&#105;&#115;&#046;&#101;&#100;&#117;">&#104;&#106;&#098;&#111;&#121;&#101;&#110;&#103;&#097;&#064;&#117;&#099;&#100;&#097;&#118;&#105;&#115;&#046;&#101;&#100;&#117;</a>
+    </address>
 </footer>
+
+<script>
+    var dateEl = document.querySelectorAll('.subheader h3')[2];
+    var now = new Date();
+    var options = { year: 'numeric', month: 'long', day: 'numeric' };
+    dateEl.textContent = now.toLocaleDateString('en-US', options);
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) entry.target.classList.add('visible');
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.past-work-gallery img').forEach(img => observer.observe(img));
+</script>
+
+</body>
 </html>

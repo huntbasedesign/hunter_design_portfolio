@@ -187,8 +187,10 @@
 <body>
 
 <header>
-    <img src="images/portfoliosketch.svg" alt="portfolio logo">
-    <h2>Hunter Boyenga</h2>
+    <div style="display: flex; align-items: center; gap: 12px;">
+        <img src="images/portfoliosketch.svg" alt="portfolio logo">
+        <h2 style="font-family: 'Anton', sans-serif; font-size: 2.2rem; line-height: 1; letter-spacing: 2px; margin: 0;">HUNTER<br>BOYENGA</h2>
+    </div>
     <nav>
         <ul>
             <li><a href="index.html">Home</a></li>
@@ -200,9 +202,9 @@
 
 <h1>Running World</h1>
 <div class="subheader">
-    <h3>Est. 2025</h3>
+    <h3>DES 157A - Interactive Media II</h3>
     <h3>Davis, CA</h3>
-    <h3>Interactive Game</h3>
+    <h3>March 13th, 2025</h3>
 </div>
 
 <main>
@@ -329,6 +331,11 @@
         Contact: <a href="mailto:&#104;&#106;&#098;&#111;&#121;&#101;&#110;&#103;&#097;&#064;&#117;&#099;&#100;&#097;&#118;&#105;&#115;&#046;&#101;&#100;&#117;">&#104;&#106;&#098;&#111;&#121;&#101;&#110;&#103;&#097;&#064;&#117;&#099;&#100;&#097;&#118;&#105;&#115;&#046;&#101;&#100;&#117;</a>
     </address>
 </footer>
-
+<script>
+    var dateEl = document.querySelectorAll('.subheader h3')[2];
+    var now = new Date();
+    var options = { year: 'numeric', month: 'long', day: 'numeric' };
+    dateEl.textContent = now.toLocaleDateString('en-US', options);
+</script>
 </body>
 </html>

@@ -14,8 +14,10 @@
 </head>
 <body>
 <header>
-    <img src="images/portfoliosketch.svg" alt="portfolio logo">
-    <h2>Hunter Boyenga</h2>
+    <div style="display: flex; align-items: center; gap: 12px;">
+        <img src="images/portfoliosketch.svg" alt="portfolio logo">
+        <h2 style="font-family: 'Anton', sans-serif; font-size: 2.2rem; line-height: 1; letter-spacing: 2px; margin: 0;">HUNTER<br>BOYENGA</h2>
+    </div>
     <nav>
         <ul>
             <li><a href="index.html">Home</a></li>
@@ -26,7 +28,7 @@
 </header>
 <h1>Bridge</h1>
     <div class="subheader">
-        <h3>DES 115 — Project 3</h3>
+        <h3>DES 115 — Typography</h3>
         <h3>Davis, CA</h3>
         <h3>November 2025</h3>
     </div>
@@ -66,6 +68,11 @@
     </div>
  
     <script>
+    var dateEl = document.querySelectorAll('.subheader h3')[2];
+    var now = new Date();
+    var options = { year: 'numeric', month: 'long', day: 'numeric' };
+    dateEl.textContent = now.toLocaleDateString('en-US', options);
+
         (function() {
             const el     = document.getElementById('slideshow-drafts');
             const slides = el.querySelectorAll('.slide');

@@ -4,19 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap" rel="stylesheet">
-
-     <link href="styles.css" rel="stylesheet">
-
+    <link href="styles.css" rel="stylesheet">
+    <style>
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50%       { opacity: 0; }
+        }
+    </style>
     <title>Hunter's Interactive Narrative</title>
 </head>
 <body>
+
 <header>
-    <img src="images/portfoliosketch.svg" alt="portfolio logo" >
-    <h2>Hunter Boyenga</h2>
+    <div style="display: flex; align-items: center; gap: 12px;">
+        <img src="images/portfoliosketch.svg" alt="portfolio logo">
+        <h2 style="font-family: 'Anton', sans-serif; font-size: 2.2rem; line-height: 1; letter-spacing: 2px; margin: 0;">HUNTER<br>BOYENGA</h2>
+    </div>
     <nav>
         <ul>
             <li><a href="index.html">Home</a></li>
@@ -26,110 +32,116 @@
     </nav>
 </header>
 
-    <h1>ITERATE</h1>
-    <div class="subheader">
-        <h3>Est. 2025</h3>
-        <h3>Davis / Atwater, CA</h3>
-        <h3>November, 11th 2025</h3>
+<h1>ITERATE</h1>
+<div class="subheader">
+    <h3>Est. 2025</h3>
+    <h3>Davis / Atwater, CA</h3>
+    <h3>November, 11th 2025</h3>
+</div>
+<div class="breakingnews">
+    <p>EXTRA! EXTRA! BREAKING DESIGN NEWS!</p>
+</div>
+<div class="ticker-wrapper">
+    <div class="ticker-track">
+        <span>HUNTER BOYENGA — DESIGNER, PHOTOGRAPHER & MULTIMEDIA CREATOR BASED IN NORTHERN CALIFORNIA</span><span class="ticker-sep">★</span>
+        <span>UC DAVIS ATHLETICS & ESPN+ BROADCAST CREW MEMBER — CAMERAS, GRAPHICS, REPLAY & LIVE PRODUCTION</span><span class="ticker-sep">★</span>
+        <span>XCTF CLUB PRESIDENT — LEADING 100+ RUNNERS TO A 5TH PLACE FINISH AT THE 2025 NIRCA NATIONAL CHAMPIONSHIPS</span><span class="ticker-sep">★</span>
+        <span>STUDYING DESIGN & HISTORY AT UC DAVIS — VISUAL COMMUNICATION, STORYTELLING & CULTURE</span><span class="ticker-sep">★</span>
+        <span>UX/UI — GRAPHIC DESIGN — TYPOGRAPHY — PHOTOGRAPHY — ALWAYS LEARNING, ALWAYS ITERATING</span><span class="ticker-sep">★</span>
+        <span>HUNTER BOYENGA — DESIGNER, PHOTOGRAPHER & MULTIMEDIA CREATOR BASED IN NORTHERN CALIFORNIA</span><span class="ticker-sep">★</span>
+        <span>UC DAVIS ATHLETICS & ESPN+ BROADCAST CREW MEMBER — CAMERAS, GRAPHICS, REPLAY & LIVE PRODUCTION</span><span class="ticker-sep">★</span>
+        <span>XCTF CLUB PRESIDENT — LEADING 100+ RUNNERS TO A 5TH PLACE FINISH AT THE 2025 NIRCA NATIONAL CHAMPIONSHIPS</span><span class="ticker-sep">★</span>
+        <span>STUDYING DESIGN & HISTORY AT UC DAVIS — VISUAL COMMUNICATION, STORYTELLING & CULTURE</span><span class="ticker-sep">★</span>
+        <span>UX/UI — GRAPHIC DESIGN — TYPOGRAPHY — PHOTOGRAPHY — ALWAYS LEARNING, ALWAYS ITERATING</span><span class="ticker-sep">★</span>
     </div>
-    <div class="breakingnews">
-        <p>EXTRA! EXTRA! BREAKING DESIGN NEWS!</p>
-    </div>
-    <div class="ticker-wrapper">
-        <div class="ticker-track">
-            <span>HUNTER BOYENGA — DESIGNER, PHOTOGRAPHER & MULTIMEDIA CREATOR BASED IN NORTHERN CALIFORNIA</span><span class="ticker-sep">★</span>
-            <span>UC DAVIS ATHLETICS & ESPN+ BROADCAST CREW MEMBER — CAMERAS, GRAPHICS, REPLAY & LIVE PRODUCTION</span><span class="ticker-sep">★</span>
-            <span>XCTF CLUB PRESIDENT — LEADING 100+ RUNNERS TO A 5TH PLACE FINISH AT THE 2025 NIRCA NATIONAL CHAMPIONSHIPS</span><span class="ticker-sep">★</span>
-            <span>STUDYING DESIGN & HISTORY AT UC DAVIS — VISUAL COMMUNICATION, STORYTELLING & CULTURE</span><span class="ticker-sep">★</span>
-            <span>UX/UI — GRAPHIC DESIGN — TYPOGRAPHY — PHOTOGRAPHY — ALWAYS LEARNING, ALWAYS ITERATING</span><span class="ticker-sep">★</span>
-            <span>HUNTER BOYENGA — DESIGNER, PHOTOGRAPHER & MULTIMEDIA CREATOR BASED IN NORTHERN CALIFORNIA</span><span class="ticker-sep">★</span>
-            <span>UC DAVIS ATHLETICS & ESPN+ BROADCAST CREW MEMBER — CAMERAS, GRAPHICS, REPLAY & LIVE PRODUCTION</span><span class="ticker-sep">★</span>
-            <span>XCTF CLUB PRESIDENT — LEADING 100+ RUNNERS TO A 5TH PLACE FINISH AT THE 2025 NIRCA NATIONAL CHAMPIONSHIPS</span><span class="ticker-sep">★</span>
-            <span>STUDYING DESIGN & HISTORY AT UC DAVIS — VISUAL COMMUNICATION, STORYTELLING & CULTURE</span><span class="ticker-sep">★</span>
-            <span>UX/UI — GRAPHIC DESIGN — TYPOGRAPHY — PHOTOGRAPHY — ALWAYS LEARNING, ALWAYS ITERATING</span><span class="ticker-sep">★</span>
-        </div>
-    </div>
+</div>
+
 <main>
     <article class="hero-article">
-         <h2>About Me</h2>
+        <h2>About Me</h2>
         <div class="hero-content">
-           
-        <img src="images/hunteryellowstone.jpg" alt="Hunter @ Yellowstone">
-        <div>
-        <p>Hi, I'm Hunter Boyenga — a designer, photographer, and multimedia creator based in Northern California. I'm currently studying Design and History at UC Davis, where I focus on visual communication, storytelling, and how design shapes culture. I work with UC Davis Athletics and ESPN+ as a cross-trained broadcast crew member, operating cameras, running graphics and replay, directing, and supporting live production. I love the fast pace of sports media and the challenge of turning real-time action into engaging visual stories. On campus, I'm also the President of the Cross Country & Track & Field Club at UC Davis. I help, coordinate, design, and lead around 100 runners. We were ranked 5th in 2025 at the NIRCA National Championships. At the core, I'm driven by creativity, problem-solving, and continuous learning. Whether it's behind a camera, designing apparel, or producing a live broadcast, I'm always looking for the next opportunity to tell a compelling story.
-        </p>
-        </div>
+            <img src="images/hunteryellowstone.jpg" alt="Hunter @ Yellowstone">
+            <div>
+                <p>Hi, I'm Hunter Boyenga — a designer, photographer, and multimedia creator based in Northern California. I'm currently studying Design and History at UC Davis, where I focus on visual communication, storytelling, and how design shapes culture. I work with UC Davis Athletics and ESPN+ as a cross-trained broadcast crew member, operating cameras, running graphics and replay, directing, and supporting live production. I love the fast pace of sports media and the challenge of turning real-time action into engaging visual stories. On campus, I'm also the President of the Cross Country & Track & Field Club at UC Davis. I help, coordinate, design, and lead around 100 runners. We were ranked 5th in 2025 at the NIRCA National Championships. At the core, I'm driven by creativity, problem-solving, and continuous learning. Whether it's behind a camera, designing apparel, or producing a live broadcast, I'm always looking for the next opportunity to tell a compelling story.</p>
+            </div>
         </div>
     </article>
+
     <article>
-    <h2>Past Work</h2>
-    <p>Over the course of my time at UC Davis I have had the opportunity to get experience in many different design mediums. From UX/UI, Graphic Design, Typography, and Photography. Each of these classes have given me the skills to become a better designer. Today I find myself mastering my craft and paving the way towards my future.</p>
-    <div class="past-work-gallery">
-        <img src="images/studentworkerhub.jpg" alt="studentworkerhub">
-        <img src="images/americansforthearts.jpg" alt="americansforthearts">
-        <img src="images/imagination.jpg" alt="imagination">
-        <img src="images/finalfrontier.jpg" alt="finalfrontier">
-        <img src="images/architecture.jpg" alt="architecture">
-        <img src="images/typographicexplore.jpg" alt="typographicexplore">
-        <img src="images/xctfclogo.png" alt="XCTF Club Logo">
-        <img src="images/clubjersey.png" alt="Club Jersey">
-    </div>
-</article>
-</main> 
+        <h2>Past Work</h2>
+        <p>Over the course of my time at UC Davis I have had the opportunity to get experience in many different design mediums. From UX/UI, Graphic Design, Typography, and Photography. Each of these classes have given me the skills to become a better designer. Today I find myself mastering my craft and paving the way towards my future.</p>
+        <div class="past-work-gallery">
+            <img src="images/studentworkerhub.jpg" alt="Student Worker Hub">
+            <img src="images/americansforthearts.jpg" alt="Americans for the Arts">
+            <img src="images/imagination.jpg" alt="Imagination">
+            <img src="images/finalfrontier.jpg" alt="Final Frontier">
+            <img src="images/architecture.jpg" alt="Architecture">
+            <img src="images/typographicexplore.jpg" alt="Typographic Exploration">
+            <img src="images/xctfclogo.png" alt="XCTF Club Logo">
+            <img src="images/clubjersey.png" alt="Club Jersey">
+        </div>
+    </article>
+</main>
+
 <footer id="contact">
-<p>Designed by Hunter Boyenga</p>
-<address>
-            Contact: <a href="mailto:&#104;&#106;&#098;&#111;&#121;&#101;&#110;&#103;&#097;&#064;&#117;&#099;&#100;&#097;&#118;&#105;&#115;&#046;&#101;&#100;&#117;">&#104;&#106;&#098;&#111;&#121;&#101;&#110;&#103;&#097;&#064;&#117;&#099;&#100;&#097;&#118;&#105;&#115;&#046;&#101;&#100;&#117;</a>
-</address>
-<style>
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0; }
-}
-</style>
- 
+    <p>Designed by Hunter Boyenga</p>
+    <address>
+        Contact: <a href="mailto:&#104;&#106;&#098;&#111;&#121;&#101;&#110;&#103;&#097;&#064;&#117;&#099;&#100;&#097;&#118;&#105;&#115;&#046;&#101;&#100;&#117;">&#104;&#106;&#098;&#111;&#121;&#101;&#110;&#103;&#097;&#064;&#117;&#099;&#100;&#097;&#118;&#105;&#115;&#046;&#101;&#100;&#117;</a>
+    </address>
+</footer>
+
 <script>
-  var h1 = document.querySelector('h1');
-  var text = h1.textContent.trim();
-  h1.innerHTML = '';
-  var cursor = document.createElement('span');
-  cursor.className = 'cursor';
-  h1.appendChild(cursor);
- 
-  var spans = text.split('').map(function(ch) {
-    var s = document.createElement('span');
-    s.className = 'letter';
-    s.textContent = ch;
-    h1.insertBefore(s, cursor);
-    return s;
-  });
- 
-  var i = 0;
-  function typeNext() {
-    if (i < spans.length) {
-      h1.insertBefore(cursor, spans[i].nextSibling);
-      spans[i].classList.add('typed');
-      i++;
-      var delay = 80 + Math.random() * 180;
-      if (Math.random() < 0.15) delay += 200;
-      setTimeout(typeNext, delay);
-    } else {
-      setTimeout(function() { cursor.style.visibility = 'hidden'; }, 1200);
-    }
-  }
-  setTimeout(typeNext, 300);
- 
-  var galleryImgs = document.querySelectorAll('.past-work-gallery img');
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry, idx) {
-      if (entry.isIntersecting) {
-        setTimeout(function() {
-          entry.target.classList.add('visible');
-        }, idx * 100);
-        observer.unobserve(entry.target);
-      }
+    // Live date
+    var dateEl = document.querySelectorAll('.subheader h3')[2];
+    var now = new Date();
+    var options = { year: 'numeric', month: 'long', day: 'numeric' };
+    dateEl.textContent = now.toLocaleDateString('en-US', options);
+
+    // Typewriter effect
+    var h1 = document.querySelector('h1');
+    var text = h1.textContent.trim();
+    h1.innerHTML = '';
+    var cursor = document.createElement('span');
+    cursor.className = 'cursor';
+    h1.appendChild(cursor);
+
+    var spans = text.split('').map(function(ch) {
+        var s = document.createElement('span');
+        s.className = 'letter';
+        s.textContent = ch;
+        h1.insertBefore(s, cursor);
+        return s;
     });
-  }, { threshold: 0.15 });
-  galleryImgs.forEach(function(img) { observer.observe(img); });
+
+    var i = 0;
+    function typeNext() {
+        if (i < spans.length) {
+            h1.insertBefore(cursor, spans[i].nextSibling);
+            spans[i].classList.add('typed');
+            i++;
+            var delay = 80 + Math.random() * 180;
+            if (Math.random() < 0.15) delay += 200;
+            setTimeout(typeNext, delay);
+        } else {
+            setTimeout(function() { cursor.style.visibility = 'hidden'; }, 1200);
+        }
+    }
+    setTimeout(typeNext, 300);
+
+    // Gallery scroll fade
+    var galleryImgs = document.querySelectorAll('.past-work-gallery img');
+    var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry, idx) {
+            if (entry.isIntersecting) {
+                setTimeout(function() {
+                    entry.target.classList.add('visible');
+                }, idx * 100);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15 });
+    galleryImgs.forEach(function(img) { observer.observe(img); });
 </script>
- 
+
+</body>
+</html>

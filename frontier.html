@@ -4,19 +4,112 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap" rel="stylesheet">
-    
     <link href="styles.css" rel="stylesheet">
 
-    <title>Hunter's Interactive Narrative</title>
+    <style>
+        .dark-callout {
+            background: #000;
+            color: #fff;
+            padding: 30px 40px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .dark-callout::before {
+            content: attr(data-label);
+            font-family: 'Anton', sans-serif;
+            font-size: 5rem;
+            color: #fff;
+            opacity: 0.06;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            letter-spacing: -0.02em;
+            line-height: 1;
+            pointer-events: none;
+        }
+        .dark-callout h3 {
+            color: #fff;
+            border-bottom: 1px solid #444;
+            margin-top: 0;
+        }
+        .dark-callout p {
+            color: #ccc;
+            margin: 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        @media (min-width: 700px) {
+            .features-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (min-width: 1024px) {
+            .features-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        .feature-card {
+            border: 2px solid #000;
+            padding: 20px;
+            background: #fff;
+            position: relative;
+        }
+        .feature-number {
+            font-family: 'Anton', sans-serif;
+            font-size: 3rem;
+            color: #000;
+            opacity: 0.07;
+            position: absolute;
+            top: 6px;
+            right: 12px;
+            line-height: 1;
+        }
+        .feature-card h3 {
+            margin-top: 0;
+            font-size: 18px;
+            border-bottom: none;
+        }
+        .feature-card p {
+            font-size: 15px;
+            margin: 0;
+        }
+
+        .genre-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .genre-tag {
+            font-family: 'Anton', sans-serif;
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            border: 2px solid #000;
+            padding: 6px 14px;
+            background: #fff;
+        }
+        .genre-tag.selected {
+            background: #000;
+            color: #fff;
+        }
+    </style>
+
+    <title>The Final Frontier</title>
 </head>
 <body>
+
 <header>
-    <img src="images/portfoliosketch.svg" alt="portfolio logo">
-    <h2>Hunter Boyenga</h2>
+    <div style="display: flex; align-items: center; gap: 12px;">
+        <img src="images/portfoliosketch.svg" alt="portfolio logo">
+        <h2 style="font-family: 'Anton', sans-serif; font-size: 2.2rem; line-height: 1; letter-spacing: 2px; margin: 0;">HUNTER<br>BOYENGA</h2>
+    </div>
     <nav>
         <ul>
             <li><a href="index.html">Home</a></li>
@@ -25,29 +118,151 @@
         </ul>
     </nav>
 </header>
+
 <h1>The Final Frontier</h1>
-    <div class="subheader">
-        <h3>Est. 2025</h3>
-        <h3>Davis / Atwater, CA</h3>
-        <h3>November, 11th 2025</h3>
-    </div>
+<div class="subheader">
+    <h3>DES 116 - Graphic Design</h3>
+    <h3>Davis / Atwater, CA</h3>
+    <h3>November 11th, 2025</h3>
+</div>
+
 <main>
-    <h2>Design Brief</h2>
-    <h3>Mission Statement</h3>
-        <p>The Final Frontier is where country roots and techno beats meet in a cosmic collision: A music festival that launches traditions into the stars. From neon lights to starlit nights, we are uniting folks under the night sky for an unforgettable musical experience. The Final Frontier is where the prairie land meets the pulse of the universe.</p>
-    <div class="past-work-gallery project-gallery">
-        <img src="images/finalfrontier.jpg" alt="Final Frontier Poster">
-        <img src="images/finalfrontier300x600.jpg" alt="Final Frontier Ad">
-        <img src="images/doritosmockup.jpg" alt="Final Frontier Doritos Mockup">
-        <img src="images/finalfrontier250x300ad.jpg" alt="Final Frontier Ad">
-        <img src="images/energy_drink_free.jpg" alt="Final Frontier Red Bull">
-    </div>
+
+<img src="images/finalfrontier.jpg" alt="Final Frontier Poster" style="width: auto; max-width: 100%; max-height: 90vh; display: block; margin: 0 auto 40px; border-bottom: 3px solid #000;">    <!-- BRIEF -->
+    <section>
+        <h2>The Assignment</h2>
+        <p>This quarter, students designed collateral for a fictitious music festival. The first project was the design and development of a festival logo — beginning with a student-selected genre paired with a second genre assigned at random. The two genres had to be distinct, and the entire festival identity would grow from that collision.</p>
+
+        <div class="dark-callout" data-label="GENRES">
+            <h3>My Two Genres</h3>
+            <p>I chose Country. My randomly assigned second genre was Techno. From that pairing, The Final Frontier was born — a festival where prairie roots launch into the cosmos.</p>
+        </div>
+
+        <p>Below are all the genres students could select from. The two that shaped this project are highlighted.</p>
+
+        <div class="genre-tags">
+            <span class="genre-tag">Acoustic</span>
+            <span class="genre-tag">Alternative</span>
+            <span class="genre-tag">Anime</span>
+            <span class="genre-tag">Bollywood</span>
+            <span class="genre-tag">Blues</span>
+            <span class="genre-tag">Chill</span>
+            <span class="genre-tag">Classical</span>
+            <span class="genre-tag selected">Country</span>
+            <span class="genre-tag">Dance</span>
+            <span class="genre-tag">EDM</span>
+            <span class="genre-tag">Electronic</span>
+            <span class="genre-tag">Folk</span>
+            <span class="genre-tag">French Pop</span>
+            <span class="genre-tag">French Rap</span>
+            <span class="genre-tag">Grunge</span>
+            <span class="genre-tag">Hard Rock</span>
+            <span class="genre-tag">Hip-Hop/Rap</span>
+            <span class="genre-tag">House</span>
+            <span class="genre-tag">Indie</span>
+            <span class="genre-tag">J-Hip-Hop</span>
+            <span class="genre-tag">J-Pop</span>
+            <span class="genre-tag">J-Rap</span>
+            <span class="genre-tag">Jazz</span>
+            <span class="genre-tag">K-Pop</span>
+            <span class="genre-tag">Latin</span>
+            <span class="genre-tag">Latin Pop</span>
+            <span class="genre-tag">Metal</span>
+            <span class="genre-tag">Pop Punk</span>
+            <span class="genre-tag">R&amp;B/Soul</span>
+            <span class="genre-tag">Reggae</span>
+            <span class="genre-tag">Sleep</span>
+            <span class="genre-tag">Soul/Funk</span>
+            <span class="genre-tag selected">Techno</span>
+            <span class="genre-tag">Yacht Rock</span>
+        </div>
+    </section>
+
+    <!-- MISSION -->
+    <section>
+        <h2>Mission Statement</h2>
+
+        <div class="dark-callout" data-label="MISSION">
+            <h3>The Final Frontier</h3>
+            <p>The Final Frontier is where country roots and techno beats meet in a cosmic collision: a music festival that launches traditions into the stars. From neon lights to starlit nights, we are uniting folks under the night sky for an unforgettable musical experience. The Final Frontier is where the prairie land meets the pulse of the universe.</p>
+        </div>
+    </section>
+
+    <!-- CONCEPT -->
+    <section>
+        <h2>Creative Concept</h2>
+        <p>The challenge was finding where Country and Techno genuinely meet — not just slapping two aesthetics together, but discovering a shared emotional space. Both genres are rooted in community and the night: honky-tonks and open fields on one side, warehouse raves and festival grounds on the other. The cosmos became the unifying metaphor — vast, open, and experienced best under a dark sky.</p>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-number">01</div>
+                <h3>Country Roots</h3>
+                <p>Wide open spaces, prairie warmth, and a sense of tradition. The dusty, grounded energy of country music gave the festival its soul and its connection to the land.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-number">02</div>
+                <h3>Techno Pulse</h3>
+                <p>Neon light, forward motion, and relentless rhythm. Techno brought the futurism — the sense that something electric and otherworldly is happening right now.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-number">03</div>
+                <h3>The Collision</h3>
+                <p>Where those two worlds meet is the night sky — a starlit canvas that belongs equally to the campfire and the laser show. That overlap became the visual and conceptual core of the festival.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CREATIVE PROCESS -->
+    <!-- CREATIVE PROCESS -->
+    <section>
+        <h2>Creative Process</h2>
+        <p>The logo development started with a mind map — pulling imagery from both genres and looking for unexpected overlaps. Stars, satellites, spurs, synthesizers, wide-open sky, strobing light. The frontier framing surfaced early and stuck: the frontier is both the edge of the known American West and the edge of what technology can reach.</p>
+
+        <img src="images/finalfrontiermindmap.jpg" alt="Final Frontier mind map" style="width: 100%; max-width: 700px; display: block; border: 3px solid #000; box-shadow: 8px 8px 0 #000; margin: 20px auto;">
+        <div class="dark-callout" data-label="PROCESS">
+            <h3>From Sketch to Identity</h3>
+            <p>Early sketches explored typographic directions, icon treatments, and color systems that could carry both the warmth of country and the cool glow of techno. The final identity leans on bold, condensed lettering grounded by celestial imagery — a visual language that feels equally at home on a barn wall and a festival LED screen.</p>
+        </div>
+
+        <img src="images/finalfrontiersketch.jpg" alt="Final Frontier logo sketches" style="width: 100%; max-width: 700px; display: block; border: 3px solid #000; box-shadow: 8px 8px 0 #000; margin: 20px auto;">
+        <p>Color played a major role in bridging the two worlds. Deep midnight blues and blacks carry the cosmic scale, while warm ambers and dusty golds bring the country warmth back in. Neon accents — the pulse of techno — cut through as highlights without overwhelming the earthy base.</p>
+    </section>
+
+    <!-- WORK -->
+    <section>
+        <h2>The Work</h2>
+        <div class="past-work-gallery project-gallery">
+            <!--<img src="images/finalfrontier.jpg" alt="Final Frontier Poster">-->
+            <img src="images/finalfrontier300x600.jpg" alt="Final Frontier Ad">
+            <img src="images/doritosmockup.jpg" alt="Final Frontier Doritos Mockup">
+            <img src="images/finalfrontier250x300ad.jpg" alt="Final Frontier Ad">
+            <img src="images/energy_drink_free.jpg" alt="Final Frontier Red Bull">
+        </div>
+    </section>
+
 </main>
+
 <footer id="contact">
-<p>Designed by Hunter Boyenga</p>
-<address>
-            Contact: <a href="mailto:&#104;&#106;&#098;&#111;&#121;&#101;&#110;&#103;&#097;&#064;&#117;&#099;&#100;&#097;&#118;&#105;&#115;&#046;&#101;&#100;&#117;">&#104;&#106;&#098;&#111;&#121;&#101;&#110;&#103;&#097;&#064;&#117;&#099;&#100;&#097;&#118;&#105;&#115;&#046;&#101;&#100;&#117;</a>
-        </address>
+    <p>Designed by Hunter Boyenga</p>
+    <address>
+        Contact: <a href="mailto:&#104;&#106;&#098;&#111;&#121;&#101;&#110;&#103;&#097;&#064;&#117;&#099;&#100;&#097;&#118;&#105;&#115;&#046;&#101;&#100;&#117;">&#104;&#106;&#098;&#111;&#121;&#101;&#110;&#103;&#097;&#064;&#117;&#099;&#100;&#097;&#118;&#105;&#115;&#046;&#101;&#100;&#117;</a>
+    </address>
 </footer>
+
+<script>
+    var dateEl = document.querySelectorAll('.subheader h3')[2];
+    var now = new Date();
+    var options = { year: 'numeric', month: 'long', day: 'numeric' };
+    dateEl.textContent = now.toLocaleDateString('en-US', options);
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) entry.target.classList.add('visible');
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.past-work-gallery img').forEach(img => observer.observe(img));
+</script>
+
 </body>
 </html>

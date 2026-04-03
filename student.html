@@ -4,18 +4,169 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap" rel="stylesheet">
-    
     <link href="styles.css" rel="stylesheet">
-    <title>Hunter's Interactive Narrative</title>
+
+    <style>
+        .dark-callout {
+            background: #000;
+            color: #fff;
+            padding: 30px 40px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .dark-callout::before {
+            content: attr(data-label);
+            font-family: 'Anton', sans-serif;
+            font-size: 5rem;
+            color: #fff;
+            opacity: 0.06;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            letter-spacing: -0.02em;
+            line-height: 1;
+            pointer-events: none;
+        }
+        .dark-callout h3 {
+            color: #fff;
+            border-bottom: 1px solid #444;
+            margin-top: 0;
+        }
+        .dark-callout p {
+            color: #ccc;
+            margin: 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        @media (min-width: 700px) {
+            .features-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (min-width: 1024px) {
+            .features-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+        .feature-card {
+            border: 2px solid #000;
+            padding: 20px;
+            background: #fff;
+            position: relative;
+        }
+        .feature-number {
+            font-family: 'Anton', sans-serif;
+            font-size: 3rem;
+            color: #000;
+            opacity: 0.07;
+            position: absolute;
+            top: 6px;
+            right: 12px;
+            line-height: 1;
+        }
+        .feature-card h3 {
+            margin-top: 0;
+            font-size: 18px;
+            border-bottom: none;
+        }
+        .feature-card p {
+            font-size: 15px;
+            margin: 0;
+        }
+
+        .project-link-wrapper {
+            display: block;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid #000;
+            box-shadow: 8px 8px 0 #000;
+            text-decoration: none;
+            color: inherit;
+            margin-top: 20px;
+            transition: transform 0.2s;
+        }
+        .project-link-wrapper:hover { transform: scale(1.01); }
+        .project-link-wrapper img {
+            width: 100%;
+            display: block;
+            aspect-ratio: 16 / 6;
+            object-fit: cover;
+            transition: transform 0.5s ease, filter 0.5s ease;
+            filter: grayscale(20%);
+            margin: 0;
+        }
+        .project-link-wrapper:hover img {
+            transform: scale(1.04);
+            filter: grayscale(0%);
+        }
+        .project-link-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.1) 55%, transparent 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 24px 32px;
+            transition: background 0.4s ease;
+        }
+        .project-link-wrapper:hover .project-link-overlay {
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.25) 60%, transparent 100%);
+        }
+        .project-link-label {
+            font-family: 'Fraunces', serif;
+            font-style: italic;
+            font-size: 13px;
+            color: #aaa;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        .project-link-title {
+            font-family: 'Anton', sans-serif;
+            font-size: clamp(1.6rem, 4vw, 3rem);
+            color: #fff;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+        .project-link-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Fraunces', serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+            opacity: 0.65;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: opacity 0.3s, gap 0.3s;
+        }
+        .project-link-wrapper:hover .project-link-cta { opacity: 1; gap: 14px; }
+        .project-link-cta::after {
+            content: '→';
+            font-size: 1.1rem;
+            transition: transform 0.3s;
+        }
+        .project-link-wrapper:hover .project-link-cta::after { transform: translateX(4px); }
+    </style>
+
+    <title>Student Worker Hub</title>
 </head>
 <body>
+
 <header>
-    <img src="images/portfoliosketch.svg" alt="portfolio logo">
-    <h2>Hunter Boyenga</h2>
+    <div style="display: flex; align-items: center; gap: 12px;">
+        <img src="images/portfoliosketch.svg" alt="portfolio logo">
+        <h2 style="font-family: 'Anton', sans-serif; font-size: 2.2rem; line-height: 1; letter-spacing: 2px; margin: 0;">HUNTER<br>BOYENGA</h2>
+    </div>
     <nav>
         <ul>
             <li><a href="index.html">Home</a></li>
@@ -24,44 +175,142 @@
         </ul>
     </nav>
 </header>
-<h1>Student Worker Hub</h1>
-    <div class="subheader">
-        <h3>Est. 2025</h3>
-        <h3>Davis / Atwater, CA</h3>
-        <h3>November, 11th 2025</h3>
-    </div>
-<main>
-    <img src="images/studentworkerhub.jpg" alt="student worker hub">
-    <h2>Design Brief</h2>
-    <h3>Problem Statement</h3>
-        <p>Hunter, a busy college student, needs a way to log their work hour through an app to save time and easily access their timecard, schedule upcoming shifts, and different work resources for contacting managers, employees, and Human Resources.</p>
-    <h3>Target Audience and Personas</h3>
-        <p>Target Audience: Student Employees and University Managers/Bosses  18-24 years old.</p>
-        <p>Needs: As student workers, we need a space and an app to combine many different aspects of life. For example, they should have a place where students can manage their class/work schedules. The app should also have messaging features to contact other students with questions or trade or drop shifts. There should also be a way to reach out to upper management and human resources regarding training and certifications or just general.</p>
-        <p>Goal: The app aims to create a seamless process for managing everything in a student's work/school life. So that they can save valuable time, rather than the current alternative of having to go to 4 or 5 different websites to do these same tasks.</p>
-        <p>Pain Points: The main pain point is that these features are only offered through browser searches, and currently, no version condenses them into a single app.</p>
-    <h3>Research Summary</h3>
-    <h4>Competitive Market</h4>
-        <p>Many different types of apps tackle these specific problems for companies. Still, these current app companies would translate poorly to the scale at which this project would need to be done to provide service for an entire university workforce like UC Davis. Instead, taking inspiration from some of the apps' good features could help recreate the app for a more extensive and diverse employee base. </p>
-        <p>Some opportunities include integrating previously created features for students all in one place. For example, incorporating the payroll, scheduling, messaging, and outreach systems, currently on different platforms, would streamline and simplify the students' experience.</p>
-        <p>Some pain points for the projects will be ensuring that the user understands all the different options and features of the app. So, it will be essential to categorize everything and ensure the navigation is clear for students to understand.</p>
-    <h3>Equity Consideration</h3>
-        <p>The main equity concern this would cover is financial. This app will help with time management and provide resources for work or payment problems. It will also make it easier and more transparent for students to get paid and have the network to sign up for shifts or contact other employees to trade and find more work.</p>
-    <h3>Features</h3>
-        <ul>
-            <li>Timecrading Calendar System</li> 
-            <li>Shift Sign Up / Drop or Trade Calendar: time management by displaying their class schedule with their work schedule.</li>
-            <li>Messaging System to contact Managers and other employees</li>
-            <li>Human Resources for students budgeting/talking to a professional about workplace problems.time management by having their class schedule display with their work schedule.</li>
-        </ul>
 
-    
+<h1>Student Worker Hub</h1>
+<div class="subheader">
+    <h3>DES 112 - UX/UI Design</h3>
+    <h3>Davis / Atwater, CA</h3>
+    <h3>November 11th, 2025</h3>
+</div>
+
+<main>
+    <!-- PROJECT LINKS -->
+    <section>
+        <h2>View the Project</h2>
+        <p>A unified app designed to consolidate scheduling, timecards, messaging, and HR resources for UC Davis student workers — all in one place.</p>
+
+        <a href="https://www.figma.com/proto/v3kbMA8jjpW3cWb9R8UXyd/UC-Davis-Student-Worker-Hub-Final-Prototype?node-id=1-2&page-id=0%3A1&starting-point-node-id=131%3A36&t=ImyBzoMDUtMiY5NG-1" class="project-link-wrapper" target="_blank" rel="noopener noreferrer">
+            <img src="images/studentworkerhubwidehome.png" alt="Student Worker Hub mobile prototype">
+            <div class="project-link-overlay">
+                <div class="project-link-label">Mobile Version</div>
+                <div class="project-link-title">Mobile Prototype</div>
+                <span class="project-link-cta">View mobile</span>
+            </div>
+        </a>
+
+    </section>
+    <!-- CASE STUDY -->
+<section>
+    <h2>Case Study</h2>
+    <p>A full breakdown of the research, wireframing, and design decisions behind the Student Worker Hub.</p>
+
+    <a href="https://www.figma.com/proto/7fRqxzntWOBadbqvJmQmKY/DES-112--UC-Davis-Student-Worker-Hub-Case-Study?node-id=1-2&p=f&viewport=417%2C-1999%2C0.26&t=hIiBu9g0rDYsTZaz-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=1%3A2&page-id=0%3A1" class="project-link-wrapper" target="_blank" rel="noopener noreferrer">
+        <img src="images/studentworkerhub.jpg" alt="Student Worker Hub case study">
+        <div class="project-link-overlay">
+            <div class="project-link-label">Case Study</div>
+            <div class="project-link-title">Read the Case Study</div>
+            <span class="project-link-cta">View case study</span>
+        </div>
+    </a>
+</section>
+
+    <!-- PROBLEM -->
+    <section>
+        <h2>Design Brief</h2>
+
+        <div class="dark-callout" data-label="PROBLEM">
+            <h3>Problem Statement</h3>
+            <p>Hunter, a busy college student, needs a way to log their work hours through an app to save time and easily access their timecard, schedule upcoming shifts, and use different work resources for contacting managers, employees, and Human Resources.</p>
+        </div>
+    </section>
+
+    <!-- AUDIENCE -->
+    <section>
+        <h2>Target Audience &amp; Personas</h2>
+        <p>Student employees and university managers aged 18–24 who need a single space to manage the overlapping demands of work and school.</p>
+
+        <div class="dark-callout" data-label="GOALS">
+            <h3>Goal</h3>
+            <p>Create a seamless process for managing everything in a student's work and school life — saving valuable time instead of navigating four or five separate websites to accomplish the same tasks.</p>
+        </div>
+
+        <p>The main pain point is that these features are currently only available through scattered browser searches, with no single app condensing them for student workers.</p>
+    </section>
+
+    <!-- FEATURES -->
+    <section>
+        <h2>Features</h2>
+        <p>Four core systems work together to cover every aspect of a student worker's day.</p>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-number">01</div>
+                <h3>Timecarding System</h3>
+                <p>Log work hours directly in the app with a calendar-based interface — no more browser logins or paper timesheets.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-number">02</div>
+                <h3>Shift Scheduling</h3>
+                <p>Sign up, drop, or trade shifts with a unified calendar that displays class and work schedules side by side.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-number">03</div>
+                <h3>Messaging System</h3>
+                <p>Contact managers and fellow employees directly — coordinate shift trades, ask questions, and stay connected without leaving the app.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-number">04</div>
+                <h3>Human Resources</h3>
+                <p>Access budgeting tools and connect with HR professionals for workplace concerns, training, certifications, and general support.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- RESEARCH -->
+    <section>
+        <h2>Research Summary</h2>
+
+        <div class="dark-callout" data-label="MARKET">
+            <h3>Competitive Market</h3>
+            <p>Many apps tackle pieces of this problem for private companies, but none scale to the size and diversity of a university workforce like UC Davis. Rather than copying existing solutions, this project draws inspiration from their strongest features and rebuilds them for a broader, more varied employee base.</p>
+        </div>
+
+        <p>Key opportunities include integrating payroll, scheduling, messaging, and HR outreach — currently scattered across different platforms — into a single streamlined experience. The primary design challenge is ensuring students can immediately understand all available options, making clear categorization and intuitive navigation essential.</p>
+    </section>
+
+    <!-- EQUITY -->
+    <section>
+        <h2>Equity Consideration</h2>
+
+        <div class="dark-callout" data-label="EQUITY">
+            <h3>Financial Accessibility</h3>
+            <p>The app's core equity focus is financial. By making pay transparency, shift access, and HR resources easier to reach, it lowers barriers for students who depend on their income — ensuring they can get paid accurately, find more work, and resolve workplace issues without friction.</p>
+        </div>
+    </section>
+
 </main>
+
 <footer id="contact">
-<p>Designed by Hunter Boyenga</p>
-<address>
-            Contact: <a href="mailto:&#104;&#106;&#098;&#111;&#121;&#101;&#110;&#103;&#097;&#064;&#117;&#099;&#100;&#097;&#118;&#105;&#115;&#046;&#101;&#100;&#117;">&#104;&#106;&#098;&#111;&#121;&#101;&#110;&#103;&#097;&#064;&#117;&#099;&#100;&#097;&#118;&#105;&#115;&#046;&#101;&#100;&#117;</a>
-        </address>
+    <p>Designed by Hunter Boyenga</p>
+    <address>
+        Contact: <a href="mailto:&#104;&#106;&#098;&#111;&#121;&#101;&#110;&#103;&#097;&#064;&#117;&#099;&#100;&#097;&#118;&#105;&#115;&#046;&#101;&#100;&#117;">&#104;&#106;&#098;&#111;&#121;&#101;&#110;&#103;&#097;&#064;&#117;&#099;&#100;&#097;&#118;&#105;&#115;&#046;&#101;&#100;&#117;</a>
+    </address>
 </footer>
+
+<script>
+    var dateEl = document.querySelectorAll('.subheader h3')[2];
+    var now = new Date();
+    var options = { year: 'numeric', month: 'long', day: 'numeric' };
+    dateEl.textContent = now.toLocaleDateString('en-US', options);
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) entry.target.classList.add('visible');
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.past-work-gallery img').forEach(img => observer.observe(img));
+</script>
+
 </body>
 </html>

@@ -25,7 +25,7 @@ header {
 }
 
 header img {
-  height: 60px;
+  height: 80px;
   width: auto;
 }
 
@@ -126,7 +126,9 @@ h1 {
 }
 
 .subheader h3 {
-  display: none;
+  display: block;
+  flex: 1;
+  text-align: center;
   font-family: 'Fraunces', serif;
   font-size: 12px;
   font-weight: 400;
@@ -207,12 +209,16 @@ article img {
 }
 
 .past-work-gallery {
-  display: block;
+  column-count: 2;
+  column-gap: 16px;
 }
 
 .past-work-gallery img {
   width: 100%;
   height: auto;
+  display: block;
+  margin-bottom: 16px;
+  break-inside: avoid;
   opacity: 0;
   transform: translateY(50px);
   transition: opacity 0.6s ease, transform 0.6s ease;
@@ -223,6 +229,11 @@ article img {
   transform: translateY(0);
 }
 
+@media (min-width: 1024px) {
+  .past-work-gallery {
+    column-count: 3;
+  }
+}
 /* ─────────────────────────────────────────────────────── */
 
 .portfolio-grid {
@@ -403,7 +414,7 @@ address a:hover {
   }
 
   .subheader h3 {
-    display: flex;
+    display: block;
   }
 
   main {
