@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap" rel="stylesheet">
+
+    <link href="styles.css" rel="stylesheet">
+
+    <style>
+        /* ── Lightbox ─────────────────────────────────────────── */
+        .lightbox-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.92);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .lightbox-overlay.open {
+            display: flex;
+        }
+        .lightbox-inner {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .lightbox-inner img {
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+            border: 3px solid #fff;
+            box-shadow: 10px 10px 0 rgba(255,255,255,0.15);
+            display: block;
+            margin: 0;
+        }
+        .lightbox-caption {
+            font-family: 'Fraunces', serif;
+            font-style: italic;
+            color: #ccc;
+            font-size: 14px;
+            margin-top: 12px;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+        .lightbox-close {
+            position: fixed;
+            top: 20px;
+            right: 24px;
+            background: none;
+            border: 2px solid #fff;
+            color: #fff;
+            font-family: 'Anton', sans-serif;
+            font-size: 20px;
+            width: 44px;
+            height: 44px;
+            cursor: pointer;
+            line-height: 1;
+            transition: background 0.2s;
+        }
+        .lightbox-close:hover {
+            background: #fff;
+            color: #000;
+        }
+        .lightbox-nav {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #fff;
+            border: 3px solid #fff;
+            color: #000;
+            font-size: 22px;
+            width: 48px;
+            height: 48px;
+            cursor: pointer;
+            font-family: 'Anton', sans-serif;
+            line-height: 1;
+            transition: background 0.2s, color 0.2s;
+        }
+        .lightbox-nav:hover {
+            background: #000;
+            color: #fff;
+            border-color: #fff;
+        }
+        .lightbox-nav.prev { left: 16px; }
+        .lightbox-nav.next { right: 16px; }
+        .lightbox-counter {
+            font-family: 'Anton', sans-serif;
+            font-size: 13px;
+            color: #666;
+            letter-spacing: 2px;
+            margin-top: 8px;
+        }
+
+        /* ── Photo grid ───────────────────────────────────────── */
+        .photo-grid {
+            column-count: 2;
+            column-gap: 16px;
+            margin-top: 10px;
+        }
+        @media (min-width: 700px) {
+            .photo-grid { column-count: 3; }
+        }
+        @media (min-width: 1024px) {
+            .photo-grid { column-count: 4; }
+        }
+
+        .photo-item {
+            break-inside: avoid;
+            margin-bottom: 16px;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #000;
+            cursor: pointer;
+            display: block;
+        }
+        .photo-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0;
+            transition: transform 0.4s ease, filter 0.4s ease;
+            filter: grayscale(10%);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.5s ease, transform 0.5s ease, filter 0.4s ease;
+        }
+        .photo-item img.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .photo-item:hover img {
+            transform: scale(1.04);
+            filter: grayscale(0%);
+        }
+        .photo-item-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 100%);
+            padding: 20px 10px 8px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .photo-item:hover .photo-item-overlay {
+            opacity: 1;
+        }
+        .photo-item-label {
+            font-family: 'Fraunces', serif;
+            font-style: italic;
+            font-size: 12px;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        /* ── Featured photo (hero) ────────────────────────────── */
+        .featured-photo {
+            position: relative;
+            overflow: hidden;
+            border: 3px solid #000;
+            box-shadow: 8px 8px 0 #000;
+            cursor: pointer;
+            margin-bottom: 40px;
+        }
+        .featured-photo img {
+            width: 100%;
+            height: 480px;
+            object-fit: cover;
+            display: block;
+            margin: 0;
+            transition: transform 0.5s ease, filter 0.5s ease;
+            filter: grayscale(15%);
+        }
+        .featured-photo:hover img {
+            transform: scale(1.03);
+            filter: grayscale(0%);
+        }
+        .featured-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.05) 60%, transparent 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 28px 32px;
+            pointer-events: none;
+        }
+        .featured-label {
+            font-family: 'Fraunces', serif;
+            font-style: italic;
+            font-size: 13px;
+            color: #aaa;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        .featured-title {
+            font-family: 'Anton', sans-serif;
+            font-size: clamp(1.8rem, 4vw, 3.2rem);
+            color: #fff;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            line-height: 1;
+        }
+
+        /* ── Pull quote ───────────────────────────────────────── */
+        .pull-quote {
+            border-left: 5px solid #000;
+            padding: 16px 24px;
+            margin: 24px 0;
+            background: #f9f9f9;
+        }
+        .pull-quote p {
+            font-style: italic;
+            font-size: 18px !important;
+            margin-bottom: 8px !important;
+            text-align: left !important;
+        }
+        .pull-quote cite {
+            font-family: 'Anton', sans-serif;
+            font-size: 12px;
+            letter-spacing: 2px;
+            color: #666;
+            text-transform: uppercase;
+        }
+    </style>
+
+    <style>
+        /* Override global h1 size so "Photography" fits on one line */
+        h1 { font-size: clamp(2rem, 11.5vw, 14vw); letter-spacing: clamp(2px, 1vw, 20px); }
+        @media (min-width: 700px)  { h1 { font-size: 11vw; } }
+        @media (min-width: 1024px) { h1 { font-size: 13vw; } }
+    </style>
+
+    <title>Photography — Hunter Boyenga</title>
+</head>
+<body>
+
+<header>
+    <div style="display: flex; align-items: center; gap: 12px;">
+        <img src="images/portfoliosketch.svg" alt="portfolio logo">
+        <h2 style="font-family: 'Anton', sans-serif; font-size: 2.2rem; line-height: 1; letter-spacing: 2px; margin: 0;">HUNTER<br>BOYENGA</h2>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<h1>Photography</h1>
+<div class="subheader">
+    <h3>Visual Portfolio</h3>
+    <h3>Davis, CA</h3>
+    <h3>2025</h3>
+</div>
+
+<main>
+
+    <!-- FEATURED PHOTO -->
+    <section>
+        <h2>Featured</h2>
+        <p>A selection of photographs spanning street, landscape, and professional work. Click any image to view it full screen.</p>
+
+        <div class="featured-photo" data-index="0">
+            <img src="images/photography/Hawaii-Postcard-V.jpg" alt="Featured photograph">
+            <div class="featured-overlay">
+                <div class="featured-label">Featured</div>
+                <!-- Replace with your photo title -->
+                <div class="featured-title">Hawaii Postcard</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT THE WORK -->
+   <section>
+    <h2>The Work</h2>
+    <p>I have been shooting since 2018, building a foundation in both capture and post-processing across Photoshop and Lightroom. Over the years I have worked as a freelance photographer covering sporting events and corporate brand work — two disciplines that demand very different things from a photographer. Sports shooting sharpens your instincts: you learn to anticipate the moment before it happens and trust your settings under pressure. Corporate and brand work pushes the other direction, toward intentionality — controlled compositions, consistent lighting, and images that communicate something specific about an organization.</p>
+
+    <div class="pull-quote">
+        <p>Photography takes an instant out of time, altering life by holding it still.</p>
+        <cite>— Dorothea Lange</cite>
+    </div>
+
+    <p>My style doesn't sit in one lane. Depending on the shoot, I might be chasing candid street moments, framing a wide landscape, or dialing in a portrait — and I find that switching between those modes keeps the eye sharp. All of my work is shot digitally, with post-processing in Lightroom for color and exposure and Photoshop for anything that needs more surgical attention. Most of these images were taken across California and beyond, locations collected over years of travel and day-to-day life. Photography has always run alongside my design work rather than separate from it; the ability to create original imagery from scratch makes every project feel more personal and more complete.</p>
+</section>
+
+    <!-- PHOTO GALLERY -->
+    <section>
+        <h2>Gallery</h2>
+        <p>16 photographs — click to enlarge.</p>
+
+        <div class="photo-grid" id="photoGrid">
+
+            <!-- PHOTO 1 -->
+            <div class="photo-item" data-index="1" data-caption="Blue Ocean Sunset">
+                <img src="images/photography/7955_Blue-Ocean-Sunset-2020-1.jpg" alt="Photo 1">
+                <div class="photo-item-overlay">
+                    <span class="photo-item-label">Blue Ocean Sunset</span>
+                </div>
+            </div>
+
+            <!-- PHOTO 2 -->
+            <div class="photo-item" data-index="2" data-caption="Conflict">
+                <img src="images/photography/7955_Conflict-2.jpg" alt="Photo 2">
+                <div class="photo-item-overlay">
+                    <span class="photo-item-label">Conflict</span>
+                </div>
+            </div>
+
+            <!-- PHOTO 3 -->
+            <div class="photo-item" data-index="3" data-caption="Dramatic Deer">
+                <img src="images/photography/7955_Dramatic-Deer-3.jpg" alt="Photo 3">
+                <div class="photo-item-overlay">
+                    <span class="photo-item-label">Dramatic Deer</span>
+                </div>
+            </div>
+
+            <!-- PHOTO 4 -->
+            <div class="photo-item" data-index="4" data-caption="El Capitan Mist">
+                <img src="images/photography/7955_El-Capitan-Mist-4.jpg" alt="Photo 4">
+                <div class="photo-item-overlay">
+                    <span class="photo-item-label">El Capitan Mist</span>
+                </div>
+            </div>
+
+            <!-- PHOTO 5 -->
+            <div class="photo-item" data-index="5" data-caption="Inspirational Dreamer">
+                <img src="images/photography/7955_Inspirational-Dreamer-5.jpg" alt="Photo 5">
+                <div class="photo-item-overlay">
+                    <span class="photo-item-label">Inspirational Dreamer</span>
+                </div>
+            </div>
+
+            <!-- PHOTO 6 -->
+            <div class="photo-item" data-index="6" data-caption="Inspire Ocean">
+                <img src="images/photography/7955_Inspire-Ocean-6.jpg" alt="Photo 6">
+                <div class="photo-item-overlay">
+                    <span class="photo-item-label">Inspire Ocean</span>
+                </div>
+            </div>
+
+            <!-- PHOTO 7 -->
+            <div class="photo-item" data-index="7" data-caption="Caption for photo 7">
+                <img src="images/photography/7955_Ocean-Sunset-2020-9.jpg" alt="Photo 7">
+                <div class="photo-item-overlay">
+                    <span class="photo-item-label">Beach Ponder</span>
+                </div>
+            </div>
+
+            <!-- PHOTO 8 -->
+            <div class="photo-item" data-index="8" data-caption="Pizza Oven">
+                <img src="images/photography/7955_Pizza-Oven-10.jpg" alt="Photo 8">
+                <div class="photo-item-overlay">
+                    <span class="photo-item-label">Pizza Oven</span>
+                </div>
+            </div>
+
+            <!-- PHOTO 9 -->
+            <div class="photo-item" data-index="9" data-caption="Strange Portal">
+                <img src="images/photography/Copy-of-Boyenga---Doctor-Strange-(1).jpg" alt="Photo 9">
+                <div class="photo-item-overlay">
+                    <span class="photo-item-label">Strange Portal</span>
+                </div>
+            </div>
+
+            <!-- PHOTO 10 -->
+            <div class="photo-item" data-index="10" data-caption="Sorin' Lake Tahoe">
+                <img src="images/photography/Copy-of-Boyenga---Lake-Tahoe-Sports.jpg" alt="Photo 10">
+                <div class="photo-item-overlay">
+                    <span class="photo-item-label">Sorin' Lake Tahoe</span>
+                </div>
+            </div>
+
+            <!-- PHOTO 11 -->
+            <div class="photo-item" data-index="11" data-caption="Rocky Mist Mountains">
+                <img src="images/photography/Copy-of-Boyenga---Rocky-Misty-Mountian.jpg" alt="Photo 11">
+                <div class="photo-item-overlay">
+                    <span class="photo-item-label">Rocky Mist Mountains</span>
+                </div>
+            </div>
+
+            <!-- PHOTO 12 -->
+            <div class="photo-item" data-index="12" data-caption="Sunset Palm">
+                <img src="images/photography/Copy-of-Boyenga---Sunset-Palm-2.jpg" alt="Photo 12">
+                <div class="photo-item-overlay">
+                    <span class="photo-item-label">Sunset Palm</span>
+                </div>
+            </div>
+
+            <!-- PHOTO 13 -->
+            <div class="photo-item" data-index="13" data-caption="Fine Art">
+                <img src="images/photography/Copy-of-IMG_4567.jpg" alt="Photo 13">
+                <div class="photo-item-overlay">
+                    <span class="photo-item-label">Fine Art</span>
+                </div>
+            </div>
+
+            <!-- PHOTO 14 -->
+            <div class="photo-item" data-index="14" data-caption="Party in the USA">
+                <img src="images/photography/Boyenga---Party-in-the-USA.jpg" alt="Photo 14">
+                <div class="photo-item-overlay">
+                    <span class="photo-item-label">Party in the USA</span>
+                </div>
+            </div>
+
+            <!-- PHOTO 15 -->
+            <div class="photo-item" data-index="15" data-caption="Spark of Inspiration">
+                <img src="images/photography/Boyenga-Fair---Spark-of-Inspiration.jpg" alt="Photo 15">
+                <div class="photo-item-overlay">
+                    <span class="photo-item-label">Spark of Inspiration</span>
+                </div>
+            </div>
+            <!-- PHOTO 16 -->
+            <div class="photo-item" data-index="15" data-caption="Butterfly">
+                <img src="images/photography/BOYENGA---orange-and-Black-Butterfly.jpg" alt="Photo 15">
+                <div class="photo-item-overlay">
+                    <span class="photo-item-label">Butterfly</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- TECHNICAL NOTES -->
+    <section>
+        <h2>Technical Notes</h2>
+        <p>All of my work is shot on a Canon DSLR, capturing RAW files to preserve as much latitude as possible in post. Every image is processed individually — no blanket presets — with Lightroom handling the initial pass for exposure, white balance, and color grading, and Photoshop brought in when a shot needs more precise retouching or compositing work. My editing philosophy leans clean and true to life: the goal is to produce an image that looks like the scene actually looked, just at its best. Shadows lifted enough to hold detail, highlights reined in where they need to be, and color that feels natural rather than pushed. The edit should be invisible.</p>
+    </section>
+
+</main>
+
+<!-- LIGHTBOX -->
+<div class="lightbox-overlay" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close">✕</button>
+    <button class="lightbox-nav prev" id="lightboxPrev" aria-label="Previous photo">‹</button>
+    <div class="lightbox-inner">
+        <img src="" alt="" id="lightboxImg">
+        <div class="lightbox-caption" id="lightboxCaption"></div>
+        <div class="lightbox-counter" id="lightboxCounter"></div>
+    </div>
+    <button class="lightbox-nav next" id="lightboxNext" aria-label="Next photo">›</button>
+</div>
+
+<footer id="contact">
+    <p>Designed by Hunter Boyenga</p>
+    <address>
+        Contact: <a href="mailto:&#104;&#106;&#098;&#111;&#121;&#101;&#110;&#103;&#097;&#064;&#117;&#099;&#100;&#097;&#118;&#105;&#115;&#046;&#101;&#100;&#117;">&#104;&#106;&#098;&#111;&#121;&#101;&#110;&#103;&#097;&#064;&#117;&#099;&#100;&#097;&#118;&#105;&#115;&#046;&#101;&#100;&#117;</a>
+    </address>
+</footer>
+
+<script>
+    // ── Scroll-in animation for grid images ──────────────────
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.photo-item img').forEach(img => observer.observe(img));
+
+    // ── Build lightbox photo list ─────────────────────────────
+    // Includes the featured photo (index 0) + all grid items (index 1–15)
+    const lightboxPhotos = [];
+
+    // Featured photo
+    const featuredEl = document.querySelector('.featured-photo');
+    if (featuredEl) {
+        lightboxPhotos[0] = {
+            src: featuredEl.querySelector('img').src,
+            alt: featuredEl.querySelector('img').alt,
+            caption: featuredEl.querySelector('.featured-title') ?
+                     featuredEl.querySelector('.featured-title').textContent : ''
+        };
+    }
+
+    // Grid photos
+    document.querySelectorAll('.photo-item').forEach(item => {
+        const idx = parseInt(item.dataset.index, 10);
+        lightboxPhotos[idx] = {
+            src: item.querySelector('img').src,
+            alt: item.querySelector('img').alt,
+            caption: item.dataset.caption || ''
+        };
+    });
+
+    // ── Lightbox logic ────────────────────────────────────────
+    const lightbox     = document.getElementById('lightbox');
+    const lightboxImg  = document.getElementById('lightboxImg');
+    const lightboxCap  = document.getElementById('lightboxCaption');
+    const lightboxCnt  = document.getElementById('lightboxCounter');
+    let currentIndex   = 0;
+    const total        = lightboxPhotos.length;
+
+    function openLightbox(index) {
+        currentIndex = index;
+        showPhoto(currentIndex);
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        lightbox.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    function showPhoto(index) {
+        const photo = lightboxPhotos[index];
+        if (!photo) return;
+        lightboxImg.src     = photo.src;
+        lightboxImg.alt     = photo.alt;
+        lightboxCap.textContent = photo.caption;
+        lightboxCnt.textContent = (index) + ' / ' + (total - 1);
+    }
+
+    function prevPhoto() {
+        currentIndex = currentIndex <= 1 ? total - 1 : currentIndex - 1;
+        showPhoto(currentIndex);
+    }
+
+    function nextPhoto() {
+        currentIndex = currentIndex >= total - 1 ? 1 : currentIndex + 1;
+        showPhoto(currentIndex);
+    }
+
+    // Click handlers — grid items
+    document.querySelectorAll('.photo-item').forEach(item => {
+        item.addEventListener('click', () => openLightbox(parseInt(item.dataset.index, 10)));
+    });
+
+    // Click handler — featured photo
+    if (featuredEl) {
+        featuredEl.addEventListener('click', () => openLightbox(0));
+    }
+
+    document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+    document.getElementById('lightboxPrev').addEventListener('click', prevPhoto);
+    document.getElementById('lightboxNext').addEventListener('click', nextPhoto);
+
+    // Close on backdrop click
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('open')) return;
+        if (e.key === 'Escape')      closeLightbox();
+        if (e.key === 'ArrowLeft')   prevPhoto();
+        if (e.key === 'ArrowRight')  nextPhoto();
+    });
+</script>
+
+</body>
+</html>
